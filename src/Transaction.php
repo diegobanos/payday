@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace Diegobanos\Payday;
 
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Transaction implements TransactionInterface
 {
     protected MemberInterface $creditor;
 
     /**
-     * @var ArrayCollection<int, MemberInterface>
+     * @var Collection<int, MemberInterface>
      */
-    protected ArrayCollection $debtors;
+    protected Collection $debtors;
 
     protected float $amount;
 
     protected DateTimeImmutable $createdAt;
 
     /**
-     * @param ArrayCollection<int, MemberInterface> $debtors
+     * @param Collection<int, MemberInterface> $debtors
      */
-    public function __construct(MemberInterface $creditor, ArrayCollection $debtors, float $amount)
+    public function __construct(MemberInterface $creditor, Collection $debtors, float $amount)
     {
         $this->creditor = $creditor;
         $this->debtors = $debtors;
@@ -37,9 +37,9 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @return ArrayCollection<int, MemberInterface>
+     * @return Collection<int, MemberInterface>
      */
-    public function getDebtors(): ArrayCollection
+    public function getDebtors(): Collection
     {
         return $this->debtors;
     }

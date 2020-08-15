@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Diegobanos\Payday;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 interface TransactionInterface
 {
     public function getCreditor(): MemberInterface;
 
     /**
-     * @return ArrayCollection<int, MemberInterface>
+     * @return Collection<int, MemberInterface>
      */
-    public function getDebtors(): ArrayCollection;
+    public function getDebtors(): Collection;
 
     public function getAmount(): float;
 }

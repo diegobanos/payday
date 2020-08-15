@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Diegobanos\Payday;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 
 class Party implements PartyInterface
@@ -12,19 +13,19 @@ class Party implements PartyInterface
     protected string $name;
 
     /**
-     * @var ArrayCollection<int, MemberInterface>
+     * @var Collection<int, MemberInterface>
      */
-    protected ArrayCollection $members;
+    protected Collection $members;
 
     /**
-     * @var ArrayCollection<int, TransactionInterface>
+     * @var Collection<int, TransactionInterface>
      */
-    protected ArrayCollection $transactions;
+    protected Collection $transactions;
 
     /**
-     * @var ArrayCollection<int, DebtInterface>
+     * @var Collection<int, DebtInterface>
      */
-    protected ArrayCollection $debts;
+    protected Collection $debts;
 
     public function __construct(string $name)
     {
@@ -40,9 +41,9 @@ class Party implements PartyInterface
     }
 
     /**
-     * @return ArrayCollection<int, MemberInterface>
+     * @return Collection<int, MemberInterface>
      */
-    public function getMembers(): ArrayCollection
+    public function getMembers(): Collection
     {
         return $this->members;
     }
@@ -58,17 +59,17 @@ class Party implements PartyInterface
     }
 
     /**
-     * @return ArrayCollection<int, TransactionInterface>
+     * @return Collection<int, TransactionInterface>
      */
-    public function getTransactions(): ArrayCollection
+    public function getTransactions(): Collection
     {
         return $this->transactions;
     }
 
     /**
-     * @return ArrayCollection<int, DebtInterface>
+     * @return Collection<int, DebtInterface>
      */
-    public function getDebts(): ArrayCollection
+    public function getDebts(): Collection
     {
         return $this->debts;
     }

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Diegobanos\Payday;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 interface PartyInterface
 {
     public function getName(): string;
 
     /**
-     * @return ArrayCollection<int, MemberInterface>
+     * @return Collection<int, MemberInterface>
      */
-    public function getMembers(): ArrayCollection;
+    public function getMembers(): Collection;
 
     /**
      * @return MemberInterface|false
@@ -21,14 +21,14 @@ interface PartyInterface
     public function getMember(string $name);
 
     /**
-     * @return ArrayCollection<int, TransactionInterface>
+     * @return Collection<int, TransactionInterface>
      */
-    public function getTransactions(): ArrayCollection;
+    public function getTransactions(): Collection;
 
     /**
-     * @return ArrayCollection<int, DebtInterface>
+     * @return Collection<int, DebtInterface>
      */
-    public function getDebts(): ArrayCollection;
+    public function getDebts(): Collection;
 
     public function addMember(string $name): self;
 
