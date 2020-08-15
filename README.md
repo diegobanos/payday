@@ -4,6 +4,12 @@ Payday is a management payment tools for a group of friends.
 
 Create a party with a list of members, add transactions as each members makes a payment for one or more members of the group, and get an updated list of debts to be settled!
 
+## Installation
+
+### Composer
+
+``` composer require diegobanos/payday ```
+
 ## Example
 
 ```
