@@ -1,0 +1,4 @@
+/.idea/
+/cov/
+/vendor/
+*.cache
