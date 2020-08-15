@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Diegobanos\Payday;
 
-class Member
+class Member implements MemberInterface
 {
     protected string $name;
 

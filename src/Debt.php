@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Diegobanos\Payday;
 
-class Debt
+class Debt implements DebtInterface
 {
-    protected Member $creditor;
+    protected MemberInterface $creditor;
 
-    protected Member $debtor;
+    protected MemberInterface $debtor;
 
     protected float $amount;
 
-    public function __construct(Member $creditor, Member $debtor)
+    public function __construct(MemberInterface $creditor, MemberInterface $debtor)
     {
         $this->creditor = $creditor;
         $this->debtor = $debtor;
         $this->amount = 0.0;
     }
 
-    public function getCreditor(): Member
+    public function getCreditor(): MemberInterface
     {
         return $this->creditor;
     }
 
-    public function getDebtor(): Member
+    public function getDebtor(): MemberInterface
     {
         return $this->debtor;
     }

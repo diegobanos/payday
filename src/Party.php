@@ -7,22 +7,22 @@ namespace Diegobanos\Payday;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 
-class Party
+class Party implements PartyInterface
 {
     protected string $name;
 
     /**
-     * @var ArrayCollection<int, Member>
+     * @var ArrayCollection<int, MemberInterface>
      */
     protected ArrayCollection $members;
 
     /**
-     * @var ArrayCollection<int, Transaction>
+     * @var ArrayCollection<int, TransactionInterface>
      */
     protected ArrayCollection $transactions;
 
     /**
-     * @var ArrayCollection<int, Debt>
+     * @var ArrayCollection<int, DebtInterface>
      */
     protected ArrayCollection $debts;
 
@@ -40,7 +40,7 @@ class Party
     }
 
     /**
-     * @return ArrayCollection<int, Member>
+     * @return ArrayCollection<int, MemberInterface>
      */
     public function getMembers(): ArrayCollection
     {
@@ -48,7 +48,7 @@ class Party
     }
 
     /**
-     * @return Member|false
+     * @return MemberInterface|false
      */
     public function getMember(string $name)
     {
@@ -58,7 +58,7 @@ class Party
     }
 
     /**
-     * @return ArrayCollection<int, Transaction>
+     * @return ArrayCollection<int, TransactionInterface>
      */
     public function getTransactions(): ArrayCollection
     {
@@ -66,7 +66,7 @@ class Party
     }
 
     /**
-     * @return ArrayCollection<int, Debt>
+     * @return ArrayCollection<int, DebtInterface>
      */
     public function getDebts(): ArrayCollection
     {
@@ -78,13 +78,13 @@ class Party
         $criteria = Criteria::create()->where(Criteria::expr()->eq('name', $name));
 
         if ($this->members->matching($criteria)->isEmpty()) {
-            $this->members->add(new Member($name));
+            $this->members->add($this->createMember($name));
         }
 
         return $this;
     }
 
-    public function removeMember(Member $member): self
+    public function removeMember(MemberInterface $member): self
     {
         if ($this->members->contains($member)) {
             $this->members->removeElement($member);
@@ -93,7 +93,7 @@ class Party
         return $this;
     }
 
-    public function addTransaction(Transaction $transaction): self
+    public function addTransaction(TransactionInterface $transaction): self
     {
         if (!$this->transactions->contains($transaction)) {
             $this->transactions->add($transaction);
@@ -135,7 +135,7 @@ class Party
                     continue;
                 }
 
-                $debt = new Debt($positiveMember, $negativeMember);
+                $debt = $this->createDebt($positiveMember, $negativeMember);
 
                 if ($positiveMember->getBalance() > $negativeBalances[$negativeMember->getName()]) {
                     $debt->setAmount($negativeBalances[$negativeMember->getName()]);
@@ -153,7 +153,7 @@ class Party
         return $this;
     }
 
-    public function removeDebt(Debt $debt): self
+    public function removeDebt(DebtInterface $debt): self
     {
         if ($this->debts->contains($debt)) {
             $debt->getCreditor()->addBalance($debt->getAmount() * -1);
@@ -162,5 +162,15 @@ class Party
         }
 
         return $this;
+    }
+
+    protected function createMember(string $name): MemberInterface
+    {
+        return new Member($name);
+    }
+
+    protected function createDebt(MemberInterface $positiveMember, MemberInterface $negativeMember): DebtInterface
+    {
+        return new Debt($positiveMember, $negativeMember);
     }
 }
