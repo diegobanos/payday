@@ -36,12 +36,12 @@ $transaction = new Transaction($creditor, $debtors, 10.0);
 
 $party->addTransaction($transaction);
 
-$party->getDebts() /** It will output two debts. Debtor 1 owes 5.0 to Collector and Debtor 2 owes 5.0 to Collector.
+$party->getDebts() /** It will output two debts. Debtor 1 owes 5.0 to Collector and Debtor 2 owes 5.0 to Collector. */
 
 /** @var Debt $debt */
 $debt = $party->getDebts()->first();
 
 $party->removeDebt($debt);
 
-$party->getDebts() /** It will output one debt. Debtor 2 owes 5.0 to Collector.
+$party->getDebts() /** It will output one debt. Debtor 2 owes 5.0 to Collector. */
 ```
